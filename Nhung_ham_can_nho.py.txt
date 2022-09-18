@@ -1,0 +1,3 @@
+names = ['Bob', 'Alice', 'Guido']
+for index, value in enumerate(names):#hàm này có cả start, xxem trang này: https://viblo.asia/p/tim-hieu-ham-enumerate-trong-python-translated-YWOZrgerlQ0 và trang này: https://stackoverflow.com/questions/70593454/remove-rows-from-csv-file-using-python
+    print(f'{index}: {value}')

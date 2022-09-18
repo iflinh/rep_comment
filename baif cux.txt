@@ -1,0 +1,34 @@
+import pandas as pd
+import requests
+from requests_html import HTMLSession
+from bs4 import BeautifulSoup
+session = HTMLSession()
+
+url = 'https://tiki.vn/search?q=quan%20%C3%A1o'
+source = session.get(url)
+
+soup = BeautifulSoup(source.text, 'html.parser')
+print(f'soup = {soup}')#tự thêm
+data = soup.find_all('div', class_='Bm3ON')
+print(f'data ==============: {data}')
+info_all = []
+for d in data:
+  print(f'd ================: {d}')#tự thêm
+  name = d.find('h3').text.strip() 
+  price = d.find('div', class_='price-discount__price').text.strip() 
+  link = "https://tiki.vn" + d['href']
+  
+  info = {
+        'name': name,
+        'price': price,
+        'link': link
+      }
+  info_all.append(info)
+  # print(link)
+  # print(price)
+  # print(name)
+# print(info_all)
+#create data frame, mấy cái này đều copy của video khác, về pandas thì anh không biết gì
+df = pd.DataFrame(info_all)
+file_name = 'info_all.csv'
+df.to_csv(file_name, index = False)

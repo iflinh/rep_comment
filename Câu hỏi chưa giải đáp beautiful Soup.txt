@@ -1,0 +1,8 @@
+nếu trong source có nhiều cái hoặc class trùng, mình có thể tìm nhiều cái dduowcj không: ví dụ:
+https://business.facebook.com/thedadonline/posts/8377086292331849/?type=3&comment_id=1235477413954004
+
+bấm kiểm tra ở thời gian comment ta có:
+
+<a class="_6qw7" data-ft="{&quot;tn&quot;:&quot;N&quot;}" href="https://business.facebook.com/thedadonline/photos/a.1881707935203083/8377086292331849/?type=3&amp;comment_id=1235477413954004"><abbr data-tooltip-content="Thứ Hai, 29 Tháng 8, 2022 lúc 08:44" data-hover="tooltip" aria-label="13 giờ trước" minimize="true" class="livetimestamp" data-utime="1661737479" data-minimize="true" id="js_sz"><span class="timestampContent">13 giờ</span></abbr></a>
+
+có thể vừa tìm class vừa tìm data-ft được không

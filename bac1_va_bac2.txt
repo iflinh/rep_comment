@@ -1,0 +1,48 @@
+print('Giải phương trình bậc 1 và 2')
+bac = float(input('Nhập số 1 hoặc 2 để chọn chương trình giải phương trình bậc 1 hoặc 2 tương ứng: '))
+if bac == 1:
+    print('Chương trình giải phương trình bậc 1: ax + b = 0')
+    print('Nhập vào a, b: ')
+    a = float(input('a = '))
+    b = float(input('b = '))
+    print(f'Chúng ta có phương trình cần giải: {a}x + {b} = 0 ')
+    if a == 0: #Phương trình 0x + b = 0
+        if b == 0: #Phương trình 0x + 0 = 0
+            print('Phương trình có vô số nghiệm.')
+        else: # b khác 0 ví dụ 4 = 0
+            print('Phương trình vô nghiệm.')
+    else:    #a khác 0
+        x = -b/a
+        print(f'Nghiệm của phương trình là: x = {x}')
+elif bac == 2:
+    print('Chương trình giải phương trình bậc 2: a*x^2 + b*x + c = 0')
+    print('Nhập vào a, b, c: ')
+    a = float(input('a = '))
+    b = float(input('b = '))
+    c = float(input('c = '))
+    print(f'Chúng ta có phương trình: {a}*x^2 + {b}*x + {c} = 0')
+    if a == 0: #a = 0, Phương trình thành 0*x^2 + bx + c = 0 hay bx + c = 0
+        if b == 0: #Phương trình thành 0*x^2 + 0x + c = 0 hay c = 0
+            if c == 0: #Phương trình thành 0*x^2 + 0x + 0 = 0 hay 0 = 0
+                print('Phương trình có vô số nghiệm.')
+            else: # c != 0, phương trình thành c = 0, mà c khác 0 như là 4 = 0
+                print('Phương trình vô nghiệm.')
+        else: # b != 0, phương trình thành bx + c = 0, (b khác 0)
+            x = -c/b
+            print(f'Phương trình có 1 nghiệm x = {x}')
+    else: # a != 0 a khác 0, giờ mới giải phương trình bậc 2
+        delta = pow(b,2) - 4*a*c
+        print(f'Delta = {delta}')
+        if delta < 0:
+            print('Phương trình vô nghiệm.')
+        elif delta == 0:
+            x = -b/(2*a)
+            print(f'Phương trình có nghiệm kép: x1 = x2 = {x}')
+        else: #delta > 0
+            x1 = (-b - pow(delta,1/2))/(2*a)
+            x2 = (-b + pow(delta,1/2))/(2*a)
+            print('Phương trình có 2 nghiệm:')
+            print(f'x1 = {x1}')
+            print(f'x2 = {x2}')
+else: #nhập vào không phải số 1, hoặc 2 để chọn phương trình
+    print('Bạn đã nhập không đúng, chương trình đã dừng lại.')

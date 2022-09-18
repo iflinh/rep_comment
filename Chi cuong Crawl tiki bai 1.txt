@@ -1,0 +1,38 @@
+import pandas as pd
+import csv
+import requests
+from requests_html import HTMLSession
+from bs4 import BeautifulSoup
+session = HTMLSession()#không hiểu dòng này
+
+url = 'https://www.lazada.vn/dien-thoai-di-dong/?spm=a2o4n.home.cate_1.1.31d2e182qnCmiS'
+source = session.get(url)
+
+soup = BeautifulSoup(source.text, 'html.parser')
+print(soup)
+data = soup.find_all('a', class_='Bm3ON')
+info_all = []
+for d in data:
+  # name = 'a'
+  price = d.find('div', class_='pooOxS').text.strip() 
+  link = d['href']
+  
+  info = {
+        # 'name': name,
+        'price': price,
+        'link': link
+      }
+  info_all.append(info)
+  # print(link)
+  # print(price)
+  # print(name)
+print(info_all)
+# create data frame, mấy cái này đều copy của video khác, về pandas thì anh không biết gì
+df = pd.DataFrame(info_all)
+file_name = 'info_all.csv'
+df.to_csv(file_name, index = False)
+# out = csv.writer(open("myfile.csv","w"), delimiter=',',quoting=csv.QUOTE_ALL)
+# out.writerow(info_all)
+
+
+

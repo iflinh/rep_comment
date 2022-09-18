@@ -1,0 +1,52 @@
+import pandas as pd
+import requests
+from requests_html import HTMLSession
+from bs4 import BeautifulSoup
+session = HTMLSession()
+import time
+
+start_time = time.time()
+
+
+for i in range(1,102):
+  print(f"==========> crawl page: {i}")
+  url = "https://www.lazada.vn/dien-thoai-di-dong/"
+  querystring = {"ajax":"true","isFirstRequest":"true","page":f"{i}","spm":"a2o4n.home.cate_1.1.31d2e182qnCmiS"}
+
+  payload = ""
+  headers = {
+      "cookie": "__wpkreporterwid_=c8eb86f4-e55c-4bf7-b4b4-0712d08607c1; lzd_cid=d3bf0099-7515-4f81-b408-b8ef48f922de; t_uid=d173b0e2-8c45-4198-c590-ee0e9ccfaffe; _bl_uid=s4lLp6CLhUho52kIRjg9y3jmX6jh; hng=VN|en|VND|704; userLanguageML=en; t_fv=1659777334959; _m_h5_tk=342ed189430272fe4ca2337df7989259_1659888966650; _m_h5_tk_enc=8fb0f1c2c5129ba1bbd6d3a1fc84f537; cna=Nx91GxsY+WoCAQE3qyc39UOT; _gcl_aw=GCL.1659881769.Cj0KCQjwxb2XBhDBARIsAOjDZ37bmz1OMk_9fgeLfKGuKutvOxFHi_aKrJvG6KFNjqo-6mpOlWgZLqYaAp6fEALw_wcB; _gcl_au=1.1.1592547337.1659881769; lzd_sid=1b5f8f8ab745ded6fd7eff8849d592d9; _tb_token_=e3735efee775e; t_sid=sF5uvoy8ImfM3OMHdHzCFbwIWj3ulXjI; utm_origin=https://colab.research.google.com/; utm_channel=SEO; xlly_s=1; EGG_SESS=S_Gs1wHo9OvRHCMp98md7IiL0RF_BJDThVDVaV1qmH9SF5vzKI_BxLqNmi2TK4WWg1waL1933SGlaXLe9V-uzunNQB-WWwmDhNTSL9bJZ2lcJK8y42udWEXvbauHM7hjmaBME61TWTXmrRZJQ0QYYBdfybMouD6bY5RHaAZER34=; tfstk=cTrFBdA_7MIE-Dz47ciPFilaAPddaBqucwH--sOcCsdeowMtgsVHwAbcsWFyQQ0h.; isg=BOHh1NcaJ0gSn4srek_ieTHg8K37jlWAh1SQnkO23ehHqgF8i95lUA_qCMYsWe24; l=eBIOw_LRLtDMr_qYBOfanurza77OSIRYjuPzaNbMiOCPO6Cw5s_5W6YtNlTeC3MNh6m2R35Wn1oBBeYBqHKKnxvTsMdg7Pkmn",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+      "accept-encoding": "gzip, deflate, br",
+      "accept-language": "en,vi;q=0.9,vi-VN;q=0.8,fr-FR;q=0.7,fr;q=0.6,en-US;q=0.5",
+      "cache-control": "max-age=0",
+      "sec-ch-ua": '"Chromium";v="104", " Not A;Brand";v="99", "Google Chrome";v="104"',
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": '"Windows"',
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "none",
+      "sec-fetch-user": "?1",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
+  }
+
+  response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
+  # source = session.get(url)
+  data = response.json()
+  listItems = data['mods']['listItems']
+  info_all = []
+  for item in listItems:
+    name = item['name']
+    link = item['itemUrl']
+    price = item['priceShow']
+    info = {
+          'name': name,
+          'price': price,
+          'link': link
+        }
+    info_all.append(info)
+  df = pd.DataFrame(info_all)
+  file_name = 'info_all.csv'
+  df.to_csv(file_name, index = False)
+print("--- %s seconds ---" % (time.time() - start_time))

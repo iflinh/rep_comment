@@ -1,0 +1,49 @@
+#https://anotepad.com/notes/4pj89dpe
+#Bài toán: An có số a, Bình có số b(2 số này tùy ý). Trên bàn có n viên đá(sỏi).
+# An và bình chơi bốc đá, ai bốc sau cùng thì thắng, người không có để bốc sau cùng thì thua.
+# Cách bốc là lấy ước chung lớn nhất của số mình có với số đá trên bàn
+#An bốc trước
+#Câu hỏi với 3 số a,b,n cho trước dự đoán ai sẽ là người lấy sau cùng (chiến thắng).
+
+################################
+########## Bài giải#############
+
+# Có n viên đá, An và Bình chơi, An có số a, Bình có số b, An lấy trước, lấy UCLN của a và số đá trên bàn = laya, sau đó Bình lấy
+# sau đó Bình lấy, trên bàn khi đó còn conb = n-laya, Bình lấy UCLN của conb và b = layb = UCLN(conb,b)
+#giò cona = conb - layb
+# Cứ lấy vậy đến ai lấy không được là thua, tức khi đó con_lai = 0, thi lay = 0, và ai lay = 0 thì thua
+
+print('Nhập vào a,b,n: ')
+a= int(input('Số của An: a = '))
+b= int(input('Số của Bình: b = '))
+n= int(input('Số sỏi ban đầu trên bàn: n = '))
+
+def uscln(x, y):#hàm này copy trên mạng cho nhanh
+    if (y == 0):
+        return x;
+    return uscln(y, x % y);
+
+con_lai = n
+an_lay__list = []
+binh_lay__list = []
+while con_lai > 0:
+    an_lay = uscln(a, con_lai)
+    an_lay__list.append(an_lay)
+    #print(f'An lấy: {an_lay}')#dòng này không cần thiết
+    con_lai = con_lai - uscln(a, con_lai)
+    # print(f'Còn lại trên bàn sau khi An lấy là: {con_lai}')#dòng này không cần thiết
+    if con_lai == 0:
+        nguoi_thang = 'An'
+        break
+    else:
+        binh_lay = uscln(b, con_lai)
+        binh_lay__list.append(binh_lay)
+        # print(f'Bình lấy: {an_lay}')#dòng này không cần thiết
+        con_lai = con_lai - uscln(b, con_lai)
+        # print(f'Còn lại trên bàn sau khi Bình lấy là: {con_lai}')#dòng này không cần thiết
+        nguoi_thang = 'Bình'
+
+print(f'List An lấy: \n{an_lay__list}')
+print(f'List Bình lấy: \n{binh_lay__list}')
+print(f'Người lấy sau cùng là: {nguoi_thang}')
+

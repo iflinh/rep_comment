@@ -1,0 +1,27 @@
+Hỏi cách truyền id comment vào phần mềm:
+login fb + 2FA
+tìm tất cả comment
+bấm xem thêm để lấy tất cả comment hoặc lấy khoảng n comment tùy theo số nào lớn hơn
+lưu id comment vào 1 file excel csv
+...........
+học cách mở tab mới.
+bấm vào reply và copy, click nút like
+..........
+đổi fb khác làm tương tự.
+......
+tự động đổi câu nói sau n lần reply
+reply x lần là đổi fb
+tự động đổi link sau y lần
+random thời gian 1-2s-3s
+fb lỗi đổi fb khác, không bị dừng mãi
+...........
+câu hỏi nếu cùng chạy và cùng xuất ra 1 tên file thì sẽ đè nhau, có cách gì để các tên file khác nhau?
+..............
+tool comment on share:
+login fb
+vào link
+bấm share, nếu có class comment thì paste vào
+đổi link, câu nói, san x,y lần, sau n lần thì đổi fb
+fb mới nếu thấy đã có comment rồi thì bỏ qua, hoặc bỏ qua nếu comment > 0
+......
+cuộn thanh kia xuống, cuộn làm sao để ô comment trong màn hình
